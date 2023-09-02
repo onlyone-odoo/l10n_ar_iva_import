@@ -96,7 +96,7 @@ class AccountIvaFile(models.Model):
                 continue
             cuit = items[7]
             razonsocial = items[8]
-            partner_id = self.env['res.partner'].search([('vat','=',cuit)])
+            partner_id = self.env['res.partner'].search([('vat','=',cuit)],limit=1)
             if items[6] == 'CUIT':
                 identification_type_id = self.env.ref('l10n_ar.it_cuit').id
             else:
