@@ -48,15 +48,15 @@ class AccountIvaFile(models.Model):
         if data[2] == 0 and data[3] == 0:
             tax_ids = [(6,0,[])]
         elif data[2] == 0 and data[3] != 0:
-            tax_id = self.env.ref('l10n_ar.1_ri_tax_vat_21_ventas')
+            tax_id = self.env.ref('l10n_ar.1_ri_tax_vat_21_compras')
             tax_ids = [(6,0,tax_id.ids)]
         else:
             if (data[1] and (data[3] / data[2]) > 0.26):
-                tax_id = self.env.ref('l10n_ar.1_ri_tax_vat_27_ventas')
+                tax_id = self.env.ref('l10n_ar.1_ri_tax_vat_27_compras')
             elif (data[1] and (data[3] / data[2]) < 0.11):
-                tax_id = self.env.ref('l10n_ar.1_ri_tax_vat_10_ventas')
+                tax_id = self.env.ref('l10n_ar.1_ri_tax_vat_10_compras')
             else:
-                tax_id = self.env.ref('l10n_ar.1_ri_tax_vat_21_ventas')
+                tax_id = self.env.ref('l10n_ar.1_ri_tax_vat_21_compras')
             tax_ids = [(6,0,tax_id.ids)]
 
         return {
