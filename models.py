@@ -148,9 +148,19 @@ class AccountIvaFile(models.Model):
                     'invoice_line_ids': invoice_line_ids,
                     'file_amount': float(items[16]),
                     }
-            domain = [('move_type','=',move_type),('name','ilike',document_number),('partner_id','=',partner_id.id)]
-            move_id = self.env['account.move'].search(domain)
+            domain = [
+                ('move_type', '=', move_type),
+                ('l10n_latam_document_number', '=', document_number),
+                ('partner_id', '=', partner_id.id)
+            ]
+            move_id = self.env['account.move'].search(domain, limit=1)
             if not move_id:
                 move_id = self.env['account.move'].create(vals_move)
             else:
                 import pdb;pdb.set_trace()
+            #domain = [('move_type','=',move_type),('name','ilike',document_number),('partner_id','=',partner_id.id)]
+            #move_id = self.env['account.move'].search(domain)
+            #if not move_id:
+            #    move_id = self.env['account.move'].create(vals_move)
+            #else:
+            #    import pdb;pdb.set_trace()
